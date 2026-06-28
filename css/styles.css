@@ -1,0 +1,219 @@
+body {
+    margin: 0;
+    overflow: hidden;
+    background-color: #1a1a1a;
+    font-family: sans-serif;
+}
+
+#canvas-container {
+    width: 100vw;
+    height: 100vh;
+}
+
+.panel {
+    background: rgba(15, 15, 15, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    padding: 14px 16px;
+}
+
+#joint-hud {
+    position: fixed;
+    right: 20px;
+    top: 20px;
+    z-index: 9999;
+    min-width: 210px;
+    pointer-events: none;
+    font-family: monospace;
+    font-size: 11px;
+}
+
+.hud-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 5px;
+}
+
+.hud-label {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.hud-value {
+    color: #fff;
+}
+
+.hud-hint {
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.35);
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+#lighting-panel {
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 9999;
+    min-width: 130px;
+    pointer-events: auto;
+}
+
+.panel-title {
+    font-family: monospace;
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.4);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 10px;
+}
+
+.panel-divider {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 8px 0;
+}
+
+.light-btn {
+    display: block;
+    width: 100%;
+    margin-bottom: 6px;
+    padding: 6px 10px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    color: #ccc;
+    font-family: monospace;
+    font-size: 12px;
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.15s, border-color 0.15s;
+    box-sizing: border-box;
+}
+
+.light-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.light-btn.active {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.35);
+    color: #fff;
+}
+
+#live-status {
+    font-family: monospace;
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.5);
+    display: block;
+    text-align: center;
+    margin-top: 2px;
+}
+
+/* shininess slider */
+
+#shininess-slider {
+    width: 100%;
+    cursor: pointer;
+    margin-bottom: 2px;
+}
+
+/* loading overlay */
+
+#loading-overlay {
+    position: fixed;
+    inset: 0;
+    background: #0f0f0f;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 99999;
+    transition: opacity 0.4s;
+}
+
+#loading-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.loading-content {
+    text-align: center;
+}
+
+.loading-spinner {
+    width: 36px;
+    height: 36px;
+    border: 3px solid rgba(255, 255, 255, 0.1);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto 16px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.loading-text {
+    font-family: monospace;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.45);
+    letter-spacing: 1.5px;
+}
+
+/* score display */
+
+#score-display {
+    position: fixed;
+    left: 20px;
+    top: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 12px 20px;
+    min-width: 80px;
+    pointer-events: none;
+}
+
+.score-label {
+    font-family: monospace;
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.4);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 4px;
+}
+
+#score-value {
+    font-family: monospace;
+    font-size: 32px;
+    color: #fff;
+    line-height: 1;
+}
+
+/* +1 flash */
+
+#score-flash {
+    position: fixed;
+    left: 50%;
+    top: 42%;
+    transform: translateX(-50%);
+    font-family: monospace;
+    font-size: 52px;
+    font-weight: bold;
+    color: #00cc44;
+    pointer-events: none;
+    opacity: 0;
+    z-index: 99998;
+}
+
+#score-flash.flash {
+    animation: score-pop 0.9s ease-out forwards;
+}
+
+@keyframes score-pop {
+    0%   { opacity: 1; transform: translateX(-50%) translateY(0)    scale(1);   }
+    50%  { opacity: 1; transform: translateX(-50%) translateY(-50px) scale(1.2); }
+    100% { opacity: 0; transform: translateX(-50%) translateY(-90px) scale(0.8); }
+}
